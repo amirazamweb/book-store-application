@@ -20,34 +20,35 @@ const Signup = () => {
     // signup Handler
     const signupHandler = async (e) => {
         e.preventDefault();
-        // try {
-        //     if (userData.password === userData.confirmPassword && userData.profileImg) {
-        //         let formData = new FormData();
-        //         formData.append('fname', userData.fname);
-        //         formData.append('lname', userData.lname);
-        //         formData.append('email', userData.email);
-        //         formData.append('password', userData.password);
-        //         formData.append('profileImg', userData.profileImg);
-        //         const { data } = await axios.post(`${process.env.REACT_APP_SERVER_DOMAIN}/api/v1/auth/signup`, formData);
-        //         if (data?.success) {
-        //             setUserData({ ...userData, fname: '', lname: '', email: '', password: '', confirmPassword: '', profileImg: '' })
-        //             toast.success(data?.message);
-        //             setTimeout(() => { navigate('/login') }, 0)
-        //         }
-        //         else {
-        //             toast.error(data?.message);
-        //         }
-        //     }
-        //     else if (userData.password !== userData.confirmPassword) {
-        //         toast.error('Confirm password not matched');
-        //     }
-        //     else if (!userData.profileImg) {
-        //         toast.error('Profile image is required');
-        //     }
-        // } catch (error) {
-        //     console.log(error);
-        //     toast.error('Something went wrong');
-        // }
+        try {
+            if (userData.password === userData.confirmPassword && userData.profileImg) {
+                let formData = new FormData();
+                formData.append('fname', userData.fname);
+                formData.append('lname', userData.lname);
+                formData.append('email', userData.email);
+                formData.append('password', userData.password);
+                formData.append('profileImg', userData.profileImg);
+                const { data } = await axios.post(`${process.env.REACT_APP_SERVER_DOMAIN}/api/v1/auth/signup`, formData);
+                console.log(data);
+                if (data?.success) {
+                    setUserData({ ...userData, fname: '', lname: '', email: '', password: '', confirmPassword: '', profileImg: '' })
+                    toast.success(data?.message);
+                    setTimeout(() => { navigate('/login') }, 0)
+                }
+                else {
+                    toast.error(data?.message);
+                }
+            }
+            else if (userData.password !== userData.confirmPassword) {
+                toast.error('Confirm password not matched');
+            }
+            else if (!userData.profileImg) {
+                toast.error('Profile image is required');
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error('Something went wrong');
+        }
     }
 
     const handleUploadProfileImage = (e) => {
