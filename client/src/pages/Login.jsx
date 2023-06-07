@@ -4,31 +4,32 @@ import loginAnimation from '../images/login-animation.gif';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { useAuth } from '../context/auth';
 
 const Login = () => {
     const [userData, setUserData] = useState({ email: '', password: '' });
     const navigate = useNavigate();
+    const [auth, setAuth] = useAuth();
 
     // login Handler
     const loginHandler = async (e) => {
         e.preventDefault();
-        console.log(userData);
-        // try {
-        //     const { data } = await axios.post(`${process.env.REACT_APP_SERVER_DOMAIN}/api/v1/auth/login`, userData);
-        //     if (data?.success) {
-        //         setUserData({ ...userData, email: '', password: '' });
-        //         toast.success(data?.message);
-        //         dispatch(login(data));
-        //         localStorage.setItem('restaurant_mern', JSON.stringify(data));
-        //         setTimeout(() => navigate(`${data?.user?.role ? '/dashboard/admin' : '/'}`), 0);
-        //     }
-        //     else {
-        //         toast.error(data?.message);
-        //     }
-        // } catch (error) {
-        //     console.log(error);
-        //     toast.error('Something went wrong')
-        // }
+        try {
+            const { data } = await axios.post(`${process.env.REACT_APP_SERVER_DOMAIN}/api/v1/auth/login`, userData);
+            if (data?.success) {
+                setUserData({ ...userData, email: '', password: '' });
+                toast.success(data?.message);
+                setAuth({ ...auth, user: data?.user, token: data?.token });
+                localStorage.setItem('bookstore_auth', JSON.stringify(data));
+                setTimeout(() => navigate('/'), 0);
+            }
+            else {
+                toast.error(data?.message);
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error('Something went wrong')
+        }
     }
     return (
         <Layout title={'Login - Book Store'}>
