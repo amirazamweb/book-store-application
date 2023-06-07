@@ -32,7 +32,7 @@ const Header = () => {
                             className='absolute -top-2 -right-2 bg-red-500 text-white m-0 p-0 rounded-full h-4 w-4 text-xs text-center'>1</div>
                     </div>
                     <div className='text-slate-600 text-xs cursor-pointer relative'>
-                        <FaUserAlt className='w-5 h-5' />
+                        <Link to='/login'><FaUserAlt className='w-5 h-5' /></Link>
                     </div>
                 </div>
             </div>

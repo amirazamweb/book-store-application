@@ -11,7 +11,8 @@ const Login = () => {
 
     // login Handler
     const loginHandler = async (e) => {
-        // e.preventDefault();
+        e.preventDefault();
+        console.log(userData);
         // try {
         //     const { data } = await axios.post(`${process.env.REACT_APP_SERVER_DOMAIN}/api/v1/auth/login`, userData);
         //     if (data?.success) {
