@@ -1,6 +1,15 @@
+import { useState } from 'react';
 import { AiFillStar } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom'
 
 const Card = () => {
+    const navigate = useNavigate();
+
+    // details Handler
+    const detailsHandler = () => {
+        window.scrollTo(0, 0);
+        navigate('/product/slug');
+    }
     return (
         <div className='bg-slate-100 rounded hover:bg-slate-200 cursor-pointer group'>
             <div className='w-full'>
@@ -21,12 +30,14 @@ const Card = () => {
                 <p className='text-base text-slate-500'>Natalia Rachaeil</p>
                 <div className='flex justify-around items-center my-2'>
                     <strong className='text-sky-500'>&#8377;689</strong>
-                    <p className='bg-green-500 rounded text-white px-2'>In Stock</p>
+                    <p className='bg-green-500 rounded text-white px-2 text-sm'>In Stock</p>
                 </div>
 
                 <div className='hidden group-hover:block my-1'>
                     <div className='flex justify-around'>
-                        <button className='bg-slate-500 rounded px-2 py-1 text-white text-sm'>Details</button>
+                        <button
+                            className='bg-slate-500 rounded px-2 py-1 text-white text-sm'
+                            onClick={detailsHandler}>Details</button>
                         <button className='bg-cyan-500 rounded px-2 py-1 text-white text-sm'>Add To Cart</button>
                     </div>
                 </div>

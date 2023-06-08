@@ -9,6 +9,7 @@ import UserRoute from "./protectedRoutes/UserRoute";
 import UserProfile from "./pages/user/UserProfile";
 import Orders from "./pages/user/Orders";
 import ProductDetail from "./pages/ProductDetail";
+import CategoryProduct from "./pages/CategoryProduct";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="orders" element={<Orders />} />
       </Route>
       <Route path="/product/:slug" element={<ProductDetail />} />
+      <Route path="/product/category/:slug" element={<CategoryProduct />} />
     </Routes>
   );
 }

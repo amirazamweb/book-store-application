@@ -22,9 +22,8 @@ const Home = () => {
                     showSearch
                     className='absolute left-24 top-1 w-60'>
                     <Option value="">New Arrivals</Option>
-                    <Option value="">Stock Market & Invetment</Option>
+                    <Option value="">Stock Market & Investment</Option>
                     <Option value="">Bookshelf of Love & Fantasy</Option>
-                    <Option value="">Stock Market & Invetment</Option>
                     <Option value="">Biographies & Autobiographies</Option>
                     <Option value="">Mystery & Suspense Novels</Option>
                 </Select>
