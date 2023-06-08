@@ -5,12 +5,33 @@ import { BsCartFill } from 'react-icons/bs';
 import toast from 'react-hot-toast';
 import logo from '../../images/logo.png'
 import { useAuth } from '../../context/auth';
+import { useSearch } from '../../context/search';
+import axios from 'axios';
 
 const Header = () => {
 
     const [auth, setAuth] = useAuth();
+    const [search, setSearch] = useSearch();
     const [showMenu, setShowMenu] = useState(false);
     const navigate = useNavigate();
+    const [keyword, setKeyword] = useState('');
+
+    // search handler
+    const searchHandler = async () => {
+        if (!keyword) {
+            return toast.error('Input Value cannot be empty');
+        }
+        try {
+            const { data } = await axios.post(`${process.env.REACT_APP_SERVER_DOMAIN}/api/v1/product/search/`, {
+                keyword
+            })
+            setSearch(data);
+            navigate(`/product/search/${keyword}`);
+            window.scrollTo(0, 0);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     // dashboard handler
     const dashboardHandler = () => {
@@ -40,8 +61,11 @@ const Header = () => {
                 <div className='flex items-center'>
                     <input type="text"
                         className='bg-slate-200 px-2 py-2 focus-within:outline-slate-400 rounded text-sm w-64'
-                        placeholder='Search books, authers, publishers...' />
-                    <button className='bg-sky-600 text-sm py-2 px-2.5 ml-2 rounded text-white'>Search</button>
+                        placeholder='Search books, authers, publishers...'
+                        onChange={(e) => setKeyword(e.target.value)} />
+                    <button
+                        className='bg-sky-600 text-sm py-2 px-2.5 ml-2 rounded text-white'
+                        onClick={searchHandler}>Search</button>
                 </div>
                 <div className='flex items-center gap-3 md:gap-8'>
                     <nav className='text-sm md:text-base flex items-center gap-2 md:gap-10'>

@@ -2,19 +2,19 @@ import { useState } from 'react';
 import { AiFillStar } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom'
 
-const Card = () => {
+const Card = ({ id, name, author, price, slug }) => {
     const navigate = useNavigate();
 
     // details Handler
     const detailsHandler = () => {
         window.scrollTo(0, 0);
-        navigate('/product/slug');
+        navigate(`/product/${slug}`);
     }
     return (
         <div className='bg-slate-100 rounded hover:bg-slate-200 cursor-pointer group'>
             <div className='w-full'>
                 <img
-                    src="https://d34a0mln2492j4.cloudfront.net/unsigned/resize:fit:408:622:0/gravity:sm/plain/https%3A%2F%2Fimage-hub.reproindialtd.com%2F9789815017908.jpg"
+                    src={`${process.env.REACT_APP_SERVER_DOMAIN}/api/v1/product/photo/${id}`}
                     alt="card-img"
                     className='w-full rounded' />
             </div>
@@ -26,10 +26,10 @@ const Card = () => {
                     <AiFillStar />
                     <AiFillStar />
                 </div>
-                <h4 className='font-semibold text-slate-600'>Why Ami I like this</h4>
-                <p className='text-base text-slate-500'>Natalia Rachaeil</p>
+                <h4 className='font-semibold text-slate-600'>{name.length < 15 ? name : name.substring(0, 15)}....</h4>
+                <p className='text-base text-slate-500'>{author.length < 15 ? author : author.substring(0, 15)}....</p>
                 <div className='flex justify-around items-center my-2'>
-                    <strong className='text-sky-500'>&#8377;689</strong>
+                    <strong className='text-sky-500'>&#8377;{price}</strong>
                     <p className='bg-green-500 rounded text-white px-2 text-sm'>In Stock</p>
                 </div>
 

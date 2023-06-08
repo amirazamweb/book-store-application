@@ -35,10 +35,6 @@ const CategoryList = () => {
                     className='bg-slate-500 text-white p-4 rounded cursor-pointer'
                     onClick={categoryHandler}
                 >Mystery & Suspense Novels</div>
-                <div
-                    className='bg-slate-500 text-white p-4 rounded cursor-pointer'
-                    onClick={categoryHandler}
-                >Internationa Best Sellers</div>
             </div>
         </Layout>
     )

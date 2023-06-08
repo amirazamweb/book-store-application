@@ -51,7 +51,7 @@ const createProductController = async (req, res) => {
 // get all products
 const allProductController = async (req, res) => {
     try {
-        const products = await ProductModel.find({}).select({ cover: 0 }).sort({ createdAt: -1 });
+        const products = await ProductModel.find({}).select({ cover: 0 }).sort({ createdAt: -1 }).limit(15);
         res.status(200).send({
             success: true,
             message: 'all product list',
@@ -138,11 +138,49 @@ const similarProductController = async (req, res) => {
     }
 }
 
+// filter product
+const filterController = async (req, res) => {
+    try {
+        const products = await ProductModel.find({ category: req.params.slug }).select({ cover: 0 });
+        res.status(200).send({
+            success: true,
+            message: 'Filtered product',
+            products
+        })
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            message: 'Error while getting filter product'
+        })
+        console.log(error);
+    }
+}
+
+// search
+const searchController = async (req, res) => {
+    try {
+        const { keyword } = req.body;
+        const results = await ProductModel.find({
+            $or: [{ name: { $regex: keyword, $options: 'i' } },
+            { author: { $regex: keyword, $options: 'i' } }]
+        }).select({ cover: 0 });
+        res.json(results);
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            message: 'Error while searching product'
+        })
+        console.log(error);
+    }
+}
+
 module.exports = {
     createProductController,
     allProductController,
     getSingleProductController,
     productPhotoController,
     categoryProductController,
-    similarProductController
+    similarProductController,
+    filterController,
+    searchController
 };

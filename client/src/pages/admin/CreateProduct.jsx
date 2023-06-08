@@ -60,7 +60,6 @@ const CreateProduct = () => {
                             className='w-full py-1 my-2 bg-slate-200 rounded'
                             onChange={(value) => setCategory(value)}>
                             <Option value="New Arrivals">New Arrivals</Option>
-                            <Option value="Internationa Best Sellers">Internationa Best Sellers</Option>
                             <Option value="Stock Market & Investment">Stock Market & Investment</Option>
                             <Option value="Bookshelf of Love & Fantasy">Bookshelf of Love & Fantasy</Option>
                             <Option value="Biographies & Autobiographies">Biographies & Autobiographies</Option>

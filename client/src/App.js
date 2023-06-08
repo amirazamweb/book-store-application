@@ -14,6 +14,7 @@ import CategoryProducts from "./pages/CategoryProducts";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Cart from "./pages/Cart";
+import SearchProduct from "./pages/SearchProduct";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
       <Route path="/product/:slug" element={<ProductDetail />} />
       <Route path="/product/category/" element={<CategoryList />} />
       <Route path="/product/category/:slug" element={<CategoryProducts />} />
+      <Route path="/product/search/:slug" element={<SearchProduct />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/cart" element={<Cart />} />

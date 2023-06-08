@@ -6,7 +6,9 @@ const { createProductController,
     getSingleProductController,
     productPhotoController,
     categoryProductController,
-    similarProductController } = require('../controllers/productController');
+    similarProductController,
+    filterController,
+    searchController } = require('../controllers/productController');
 
 // create ||post
 router.post('/create', formidable(), createProductController);
@@ -24,6 +26,12 @@ router.get('/photo/:pid', productPhotoController)
 router.get('/category/:slug', categoryProductController)
 
 // similar products
-router.get('/similar-roducts/:slug', similarProductController)
+router.get('/similar-products/:slug', similarProductController)
+
+// filter products
+router.get('/filter/:slug', filterController)
+
+// search product
+router.post('/search', searchController)
 
 module.exports = router;
