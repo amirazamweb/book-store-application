@@ -29,7 +29,7 @@ const Header = () => {
                 </div>
                 <div className='flex items-center'>
                     <input type="text"
-                        className='bg-slate-300 px-2 py-2 focus-within:outline-slate-400 rounded text-sm w-64'
+                        className='bg-slate-200 px-2 py-2 focus-within:outline-slate-400 rounded text-sm w-64'
                         placeholder='Search books, authers, publishers...' />
                     <button className='bg-sky-600 text-sm py-2 px-2.5 ml-2 rounded text-white'>Search</button>
                 </div>

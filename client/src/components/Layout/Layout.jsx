@@ -12,8 +12,11 @@ const Layout = ({ title, children }) => {
                 <meta charSet="utf-8" />
                 <title>{title}</title>
             </Helmet>
+            {/* header */}
             <Header />
+            {/* page content */}
             {children}
+            {/* footer */}
             <Footer />
         </>
     )
