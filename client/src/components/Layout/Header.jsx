@@ -12,8 +12,18 @@ const Header = () => {
     const [showMenu, setShowMenu] = useState(false);
     const navigate = useNavigate();
 
-    // logout handler
+    // dashboard handler
+    const dashboardHandler = () => {
+        window.scrollTo(0, 0);
+        if (auth.user?.role === 1) {
+            navigate('/dashboard/admin/profile');
+        }
+        else {
+            navigate('/dashboard/user/profile');
+        }
+    }
 
+    // logout handler
     const logoutHandler = () => {
         setAuth({ ...auth, user: null, token: '' });
         localStorage.removeItem('bookstore_auth');
@@ -36,11 +46,12 @@ const Header = () => {
                 <div className='flex items-center gap-3 md:gap-8'>
                     <nav className='text-sm md:text-base flex items-center gap-2 md:gap-10'>
                         <NavLink to='/'>Home</NavLink>
-                        <NavLink to='/menu'>Category</NavLink>
+                        <NavLink to='/product/category'>Category</NavLink>
                         <NavLink to='/about'>About</NavLink>
                         <NavLink to='/contact'>Contact</NavLink>
                     </nav>
-                    <div className='text-slate-600 relative md:text-lg'>
+                    <div className='text-slate-600 relative md:text-lg cursor-pointer'
+                        onClick={() => navigate('/cart')}>
                         <BsCartFill />
                         <div
                             className='absolute -top-2 -right-2 bg-red-500 text-white m-0 p-0 rounded-full h-4 w-4 text-xs text-center'>1</div>
@@ -60,12 +71,9 @@ const Header = () => {
 
                             {auth?.token &&
                                 (<>
-                                    <Link to="/"
-                                        className='hover:text-red-500 text-center font-bold'>
-                                        <p>Dashboard</p>
-                                    </Link>
-                                    <p
-                                        className='my-2 bg-red-500 px-2 text-white'
+                                    <p className='hover:text-red-500 text-center font-bold'
+                                        onClick={dashboardHandler}>Dashboard</p>
+                                    <p className='my-2 bg-red-500 px-2 text-white'
                                         onClick={logoutHandler}>Logout</p>
                                 </>)
                             }

@@ -9,7 +9,11 @@ import UserRoute from "./protectedRoutes/UserRoute";
 import UserProfile from "./pages/user/UserProfile";
 import Orders from "./pages/user/Orders";
 import ProductDetail from "./pages/ProductDetail";
-import CategoryProduct from "./pages/CategoryProduct";
+import CategoryList from "./pages/CategoryList";
+import CategoryProducts from "./pages/CategoryProducts";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Cart from "./pages/Cart";
 
 function App() {
   return (
@@ -26,7 +30,11 @@ function App() {
         <Route path="orders" element={<Orders />} />
       </Route>
       <Route path="/product/:slug" element={<ProductDetail />} />
-      <Route path="/product/category/:slug" element={<CategoryProduct />} />
+      <Route path="/product/category/" element={<CategoryList />} />
+      <Route path="/product/category/:slug" element={<CategoryProducts />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/cart" element={<Cart />} />
     </Routes>
   );
 }

@@ -4,6 +4,7 @@ const colors = require('colors');
 const dotenv = require('dotenv');
 const connectDB = require('./db/db');
 const authRoutes = require('./routes/authRoutes');
+const productRoutes = require('./routes/productRoutes');
 
 // config env file
 dotenv.config();
@@ -19,6 +20,7 @@ connectDB();
 
 // routes
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/product', productRoutes);
 
 // PORT
 const PORT = process.env.PORT || 4200;

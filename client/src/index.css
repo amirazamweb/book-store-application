@@ -53,3 +53,8 @@ code {
     transform: rotate(360deg);
   }
 }
+
+/* active link */
+.active {
+  font-weight: bold;
+}

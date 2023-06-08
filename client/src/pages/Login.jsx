@@ -21,7 +21,12 @@ const Login = () => {
                 toast.success(data?.message);
                 setAuth({ ...auth, user: data?.user, token: data?.token });
                 localStorage.setItem('bookstore_auth', JSON.stringify(data));
-                setTimeout(() => navigate('/'), 0);
+                if (data?.user.role === 1) {
+                    setTimeout(() => navigate('/dashboard/admin/profile'), 0);
+                }
+                else {
+                    setTimeout(() => navigate('/'), 0);
+                }
             }
             else {
                 toast.error(data?.message);
