@@ -1,8 +1,11 @@
 import React from 'react'
+import footerImg from '../../images/footer.png'
 
 const Footer = () => {
     return (
-        <h1 className='my-16'>Footer</h1>
+        <div className='w-full'>
+            <img src={footerImg} alt="footer img" className='w-full' />
+        </div>
     )
 }
 
