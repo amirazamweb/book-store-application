@@ -5,11 +5,29 @@ import { GrFormAdd, GrFormSubtract } from 'react-icons/gr';
 import Card from '../components/Card';
 import axios from 'axios';
 import notFoundAnimation from '../images/not-found-animation.gif';
+import { useCart } from '../context/cart';
+import toast from 'react-hot-toast';
 
 const ProductDetail = () => {
     const { slug } = useParams();
     const [productInfo, setProductInfo] = useState({});
     const [similarProducts, setSimilarProducts] = useState([]);
+    const [count, setCount] = useState(2);
+    const [cart, setCart] = useCart();
+
+    // decreament Handler
+    const decreamentHandler = () => {
+        if (count > 1) {
+            setCount(count - 1);
+        }
+    }
+
+    // increament Handler
+    const increamentHandler = () => {
+        if (count > 0 && count < 10) {
+            setCount(count + 1);
+        }
+    }
 
     // get single product details
     const getProductDetails = async () => {
@@ -19,6 +37,18 @@ const ProductDetail = () => {
         } catch (error) {
             console.log(error);
         }
+    }
+
+    // add To CartHandler
+    const addToCartHandler = () => {
+        productInfo.itemCount = count;
+        setCart([...cart, productInfo]);
+
+        // addind data to local storage
+        const localStore = JSON.parse(localStorage.getItem('bookstore_cart')) || [];
+        localStore.push(productInfo);
+        localStorage.setItem('bookstore_cart', JSON.stringify(localStore));
+        toast.success('Product added to cart');
     }
 
     // get similar products
@@ -51,9 +81,13 @@ const ProductDetail = () => {
                     <div className='flex items-center my-5'>
                         <p className='text-slate-500 font-bold text-xl me-8'>Quantity: </p>
                         <div className='flex items-center w-1/5 justify-between text-2xl font-bold'>
-                            <GrFormSubtract className='outline outline-2 outline-slate-300 rounded hover:bg-red-500 w-8 h-8' />
-                            <span>0</span>
-                            <GrFormAdd className='outline outline-2 outline-slate-300 rounded hover:bg-green-500 w-8 h-8' />
+                            <GrFormSubtract
+                                className='outline outline-2 outline-slate-300 rounded hover:bg-red-500 w-8 h-8 cursor-pointer'
+                                onClick={decreamentHandler} />
+                            <span>{count}</span>
+                            <GrFormAdd
+                                className='outline outline-2 outline-slate-300 rounded hover:bg-green-500 w-8 h-8 cursor-pointer'
+                                onClick={increamentHandler} />
                         </div>
                     </div>
                     <div className='border-solid border-2 border-slate-300 w-1/3 rounded px-3 py-1 my-4'>
@@ -65,7 +99,9 @@ const ProductDetail = () => {
                         </p>
                     </div>
                     <div className='my-2'>
-                        <button className='bg-red-500 text-white rounded px-3 py-2 font-semibold'>GO TO CART</button>
+                        <button
+                            className='bg-red-500 text-white rounded px-3 py-2 font-semibold'
+                            onClick={addToCartHandler}>GO TO CART</button>
                     </div>
                     <div>
                         <h3 className='text-xl font-semibold text-salte-600 my-2'>Description</h3>
@@ -90,6 +126,7 @@ const ProductDetail = () => {
                                         price={elm.price}
                                         id={elm._id}
                                         slug={elm.productSlug}
+                                        cardInfo={elm}
                                     />
                                 ))
                             ) :

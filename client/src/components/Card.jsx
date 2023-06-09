@@ -1,15 +1,31 @@
 import { useState } from 'react';
 import { AiFillStar } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { useCart } from '../context/cart';
 
-const Card = ({ id, name, author, price, slug }) => {
+const Card = ({ id, name, author, price, slug, cardInfo }) => {
     const navigate = useNavigate();
+    const [cart, setCart] = useCart();
 
     // details Handler
     const detailsHandler = () => {
         window.scrollTo(0, 0);
         navigate(`/product/${slug}`);
     }
+
+    // add To Cart Handler
+    const addToCartHandler = () => {
+        cardInfo.itemCount = 1;
+        setCart([...cart, cardInfo]);
+
+        // adding data to local storage
+        const localStore = JSON.parse(localStorage.getItem('bookstore_cart')) || [];
+        localStore.push(cardInfo);
+        localStorage.setItem('bookstore_cart', JSON.stringify(localStore));
+        toast.success('Product added to cart');
+    }
+
     return (
         <div className='bg-slate-100 rounded hover:bg-slate-200 cursor-pointer group'>
             <div className='w-full'>
@@ -38,7 +54,9 @@ const Card = ({ id, name, author, price, slug }) => {
                         <button
                             className='bg-slate-500 rounded px-2 py-1 text-white text-sm'
                             onClick={detailsHandler}>Details</button>
-                        <button className='bg-cyan-500 rounded px-2 py-1 text-white text-sm'>Add To Cart</button>
+                        <button
+                            className='bg-cyan-500 rounded px-2 py-1 text-white text-sm'
+                            onClick={addToCartHandler}>Add To Cart</button>
                     </div>
                 </div>
             </div>

@@ -42,6 +42,7 @@ const CategoryProducts = () => {
                                         price={el.price}
                                         id={el._id}
                                         slug={el.productSlug}
+                                        cardInfo={el}
                                     />
                                 ))
                             }

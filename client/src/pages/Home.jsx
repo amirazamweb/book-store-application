@@ -90,6 +90,7 @@ const Home = () => {
                                     price={e.price}
                                     id={e._id}
                                     slug={e.productSlug}
+                                    cardInfo={e}
                                 />
                             )
                         })}

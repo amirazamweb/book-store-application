@@ -7,6 +7,7 @@ import logo from '../../images/logo.png'
 import { useAuth } from '../../context/auth';
 import { useSearch } from '../../context/search';
 import axios from 'axios';
+import { useCart } from '../../context/cart';
 
 const Header = () => {
 
@@ -15,6 +16,7 @@ const Header = () => {
     const [showMenu, setShowMenu] = useState(false);
     const navigate = useNavigate();
     const [keyword, setKeyword] = useState('');
+    const [cart] = useCart();
 
     // search handler
     const searchHandler = async () => {
@@ -77,8 +79,9 @@ const Header = () => {
                     <div className='text-slate-600 relative md:text-lg cursor-pointer'
                         onClick={() => navigate('/cart')}>
                         <BsCartFill />
-                        <div
-                            className='absolute -top-2 -right-2 bg-red-500 text-white m-0 p-0 rounded-full h-4 w-4 text-xs text-center'>1</div>
+                        {cart.length > 0 && (
+                            <div className='absolute -top-2 -right-2 bg-red-500 text-white m-0 p-0 rounded-full h-4 w-4 text-xs text-center'>{cart?.length}</div>
+                        )}
                     </div>
                     <div className='text-slate-600 text-xs cursor-pointer relative'>
                         {auth?.token ? (

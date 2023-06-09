@@ -25,6 +25,7 @@ const SearchProduct = () => {
                                             price={e.price}
                                             id={e._id}
                                             slug={e.productSlug}
+                                            cardInfo={e}
                                         />
                                     )
                                 })}
